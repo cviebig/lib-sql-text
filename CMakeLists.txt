@@ -13,11 +13,6 @@ find_package( Boost 1.61.0 COMPONENTS filesystem system )
 include_directories( ${Boost_INCLUDE_DIR} )
 
 
-# Compiler options
-# Clang maximum template depth seems to be 256
-SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ftemplate-depth-750" )
-SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ferror-limit=1000" )
-
 # SQL grammar library
 add_library(sql_text INTERFACE)
 target_include_directories(sql_text INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
