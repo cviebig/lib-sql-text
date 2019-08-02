@@ -6,6 +6,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     find_package( lib-sql )
 endif()
 
+find_package(Catch2 REQUIRED)
 
 # Boost
 find_package( Boost 1.61.0 COMPONENTS filesystem system )
