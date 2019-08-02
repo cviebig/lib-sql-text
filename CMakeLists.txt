@@ -31,7 +31,7 @@ target_include_directories(sql_text_parser PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/i
 export(TARGETS sql_text_parser FILE sql_text_parserConfig.cmake)
 export(PACKAGE sql_text_parser)
 
-set_property(TARGET sql_text_parser PROPERTY CXX_STANDARD 14)
+set_property(TARGET sql_text_parser PROPERTY CXX_STANDARD 17)
 set_property(TARGET sql_text_parser PROPERTY CXX_STANDARD_REQUIRED ON)
 
 

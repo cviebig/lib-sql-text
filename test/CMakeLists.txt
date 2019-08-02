@@ -8,7 +8,7 @@ macro (add_test_target TEST_NAME TEST_SOURCE)
         target_link_libraries(${TEST_NAME} sql_text ${Boost_LIBRARIES} Catch2::Catch2)
         target_include_directories(${TEST_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-        set_property(TARGET ${TEST_NAME} PROPERTY CXX_STANDARD 14)
+        set_property(TARGET ${TEST_NAME} PROPERTY CXX_STANDARD 17)
         set_property(TARGET ${TEST_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 
         add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
