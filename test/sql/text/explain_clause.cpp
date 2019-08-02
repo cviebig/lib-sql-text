@@ -10,8 +10,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( !e.ast.explain );
-        CHECK( !e.ast.query_plan );
+        CHECK( !e.attribute.explain );
+        CHECK( !e.attribute.query_plan );
     }
 
     TEST_CASE( "EXPLAIN", "[explain clause]" ) {
@@ -20,8 +20,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.explain );
-        CHECK( !e.ast.query_plan );
+        CHECK( e.attribute.explain );
+        CHECK( !e.attribute.query_plan );
     }
 
     TEST_CASE( "EXPLAIN QUERY PLAN", "[explain clause]" ) {
@@ -30,8 +30,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.explain );
-        CHECK( e.ast.query_plan );
+        CHECK( e.attribute.explain );
+        CHECK( e.attribute.query_plan );
     }
 
     TEST_CASE( "Incomplete query plan", "[explain clause]" ) {
@@ -40,8 +40,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( !e.finished );
         CHECK( e.remainder == 4 );
-        CHECK( e.ast.explain );
-        CHECK( !e.ast.query_plan );
+        CHECK( e.attribute.explain );
+        CHECK( !e.attribute.query_plan );
     }
 
     TEST_CASE( "Incomplete explain", "[explain clause]" ) {
@@ -50,8 +50,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( !e.finished );
         CHECK( e.remainder == 6 );
-        CHECK( !e.ast.explain );
-        CHECK( !e.ast.query_plan );
+        CHECK( !e.attribute.explain );
+        CHECK( !e.attribute.query_plan );
     }
 
 }}

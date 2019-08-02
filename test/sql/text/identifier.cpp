@@ -46,8 +46,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.identifier == "a" );
-        CHECK( e.ast.quotation  == quot::NONE );
+        CHECK( e.attribute.identifier == "a" );
+        CHECK( e.attribute.quotation  == quot::NONE );
     }
 
     TEST_CASE( "Single character double quoted identifier", "[identifier]" ) {
@@ -56,8 +56,8 @@ namespace sql { namespace text {
         CHECK( e.success   );
         CHECK( e.finished   );
         CHECK( e.remainder == 0   );
-        CHECK( e.ast.identifier == "a" );
-        CHECK( e.ast.quotation  == quot::DOUBLE           );
+        CHECK( e.attribute.identifier == "a" );
+        CHECK( e.attribute.quotation  == quot::DOUBLE );
     }
 
     TEST_CASE( "Single character squarly quoted identifier", "[identifier]" ) {
@@ -66,8 +66,8 @@ namespace sql { namespace text {
         CHECK( e.success    );
         CHECK( e.finished    );
         CHECK( e.remainder == 0    );
-        CHECK( e.ast.identifier == "a" );
-        CHECK( e.ast.quotation  == quot::SQUARED           );
+        CHECK( e.attribute.identifier == "a" );
+        CHECK( e.attribute.quotation  == quot::SQUARED );
     }
 
     TEST_CASE( "Single character backticket quoted identifier", "[identifier]" ) {
@@ -76,8 +76,8 @@ namespace sql { namespace text {
         CHECK( e.success     );
         CHECK( e.finished     );
         CHECK( e.remainder == 0     );
-        CHECK( e.ast.identifier == "a" );
-        CHECK( e.ast.quotation  == quot::BACKTICK );
+        CHECK( e.attribute.identifier == "a" );
+        CHECK( e.attribute.quotation  == quot::BACKTICK );
     }
 
     TEST_CASE( "Single character single quoted identifier", "[identifier]" ) {
@@ -104,8 +104,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.identifier == "1" );
-        CHECK( e.ast.quotation  == quot::DOUBLE );
+        CHECK( e.attribute.identifier == "1" );
+        CHECK( e.attribute.quotation  == quot::DOUBLE );
     }
 
     TEST_CASE( "Single digit squarly quoted identifier", "[identifier]" ) {
@@ -114,8 +114,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.identifier == "1" );
-        CHECK( e.ast.quotation  == quot::SQUARED );
+        CHECK( e.attribute.identifier == "1" );
+        CHECK( e.attribute.quotation  == quot::SQUARED );
     }
 
     TEST_CASE( "Single digit backticket quoted identifier", "[identifier]" ) {
@@ -124,8 +124,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.identifier == "1" );
-        CHECK( e.ast.quotation  == quot::BACKTICK );
+        CHECK( e.attribute.identifier == "1" );
+        CHECK( e.attribute.quotation  == quot::BACKTICK );
     }
 
     TEST_CASE( "Single digit single quoted identifier", "[identifier]" ) {
@@ -201,15 +201,15 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.size() == 4 );
-        CHECK( e.ast[0].identifier == "a" );
-        CHECK( e.ast[1].identifier == "b" );
-        CHECK( e.ast[2].identifier == "c" );
-        CHECK( e.ast[3].identifier == "d" );
-        CHECK( e.ast[0].quotation  == quot::NONE );
-        CHECK( e.ast[1].quotation  == quot::DOUBLE );
-        CHECK( e.ast[2].quotation  == quot::SQUARED );
-        CHECK( e.ast[3].quotation  == quot::BACKTICK );
+        CHECK( e.attribute.size() == 4 );
+        CHECK( e.attribute[0].identifier == "a" );
+        CHECK( e.attribute[1].identifier == "b" );
+        CHECK( e.attribute[2].identifier == "c" );
+        CHECK( e.attribute[3].identifier == "d" );
+        CHECK( e.attribute[0].quotation  == quot::NONE );
+        CHECK( e.attribute[1].quotation  == quot::DOUBLE );
+        CHECK( e.attribute[2].quotation  == quot::SQUARED );
+        CHECK( e.attribute[3].quotation  == quot::BACKTICK );
     }
 
 

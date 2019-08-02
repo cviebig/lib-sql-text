@@ -49,11 +49,11 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0);
-        bool schema = boost::apply_visitor( variant_type_check_visitor<ast::schema_table_identifier>(), e.ast.identifier );
-        bool simple = boost::apply_visitor( variant_type_check_visitor<ast::simple_table_identifier>(), e.ast.identifier );
+        bool schema = boost::apply_visitor( variant_type_check_visitor<ast::schema_table_identifier>(), e.attribute.identifier );
+        bool simple = boost::apply_visitor( variant_type_check_visitor<ast::simple_table_identifier>(), e.attribute.identifier );
         CHECK( !schema );
         CHECK(  simple );
-        ast::simple_table_identifier tbl_name = boost::get<ast::simple_table_identifier>(e.ast.identifier);
+        ast::simple_table_identifier tbl_name = boost::get<ast::simple_table_identifier>(e.attribute.identifier);
         CHECK( tbl_name.table.identifier == "a" );
     }
 
@@ -72,7 +72,7 @@ namespace sql { namespace text {
         CHECK( e.finished );
         CHECK( e.remainder == 0);
 
-        ast::binary_operation b = boost::get<forward_ast<ast::binary_operation>>(e.ast.expression);
+        ast::binary_operation b = boost::get<forward_ast<ast::binary_operation>>(e.attribute.expression);
 
         ast::expr first = b.first;
         ast::expr second = b.second;
@@ -87,7 +87,7 @@ namespace sql { namespace text {
         CHECK( b.op == ast::bop::EQ );
         CHECK( ssecond.column.identifier == "b" );
 
-        CHECK( e.ast.alias == boost::none);
+        CHECK( e.attribute.alias == boost::none);
     }
 
     TEST_CASE( "Aliased expression result column", "[result_column]" ) {
@@ -97,7 +97,7 @@ namespace sql { namespace text {
         CHECK( e.finished );
         CHECK( e.remainder == 0);
 
-        ast::binary_operation b = boost::get<forward_ast<ast::binary_operation>>(e.ast.expression);
+        ast::binary_operation b = boost::get<forward_ast<ast::binary_operation>>(e.attribute.expression);
 
         ast::expr first = b.first;
         ast::expr second = b.second;
@@ -112,7 +112,7 @@ namespace sql { namespace text {
         CHECK( b.op == ast::bop::EQ );
         CHECK( ssecond.column.identifier == "b" );
 
-        CHECK( e.ast.alias.get().identifier == "c" );
+        CHECK( e.attribute.alias.get().identifier == "c" );
     }
 
     // Variant tests
@@ -123,9 +123,9 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0);
-        bool al = boost::apply_visitor( variant_type_check_visitor<ast::result_column_all>(), e.ast );
-        bool ta = boost::apply_visitor( variant_type_check_visitor<ast::result_column_table>(), e.ast );
-        bool ex = boost::apply_visitor( variant_type_check_visitor<ast::result_column_expr>(), e.ast );
+        bool al = boost::apply_visitor( variant_type_check_visitor<ast::result_column_all>(), e.attribute );
+        bool ta = boost::apply_visitor( variant_type_check_visitor<ast::result_column_table>(), e.attribute );
+        bool ex = boost::apply_visitor( variant_type_check_visitor<ast::result_column_expr>(), e.attribute );
         CHECK(  al );
         CHECK( !ta );
         CHECK( !ex );
@@ -137,9 +137,9 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0);
-        bool al = boost::apply_visitor( variant_type_check_visitor<ast::result_column_all>(), e.ast );
-        bool ta = boost::apply_visitor( variant_type_check_visitor<ast::result_column_table>(), e.ast );
-        bool ex = boost::apply_visitor( variant_type_check_visitor<ast::result_column_expr>(), e.ast );
+        bool al = boost::apply_visitor( variant_type_check_visitor<ast::result_column_all>(), e.attribute );
+        bool ta = boost::apply_visitor( variant_type_check_visitor<ast::result_column_table>(), e.attribute );
+        bool ex = boost::apply_visitor( variant_type_check_visitor<ast::result_column_expr>(), e.attribute );
         CHECK( !al );
         CHECK(  ta );
         CHECK( !ex );
@@ -151,9 +151,9 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0);
-        bool al = boost::apply_visitor( variant_type_check_visitor<ast::result_column_all>(), e.ast );
-        bool ta = boost::apply_visitor( variant_type_check_visitor<ast::result_column_table>(), e.ast );
-        bool ex = boost::apply_visitor( variant_type_check_visitor<ast::result_column_expr>(), e.ast );
+        bool al = boost::apply_visitor( variant_type_check_visitor<ast::result_column_all>(), e.attribute );
+        bool ta = boost::apply_visitor( variant_type_check_visitor<ast::result_column_table>(), e.attribute );
+        bool ex = boost::apply_visitor( variant_type_check_visitor<ast::result_column_expr>(), e.attribute );
         CHECK( !al );
         CHECK( !ta );
         CHECK(  ex );
@@ -165,9 +165,9 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0);
-        bool al = boost::apply_visitor( variant_type_check_visitor<ast::result_column_all>(), e.ast );
-        bool ta = boost::apply_visitor( variant_type_check_visitor<ast::result_column_table>(), e.ast );
-        bool ex = boost::apply_visitor( variant_type_check_visitor<ast::result_column_expr>(), e.ast );
+        bool al = boost::apply_visitor( variant_type_check_visitor<ast::result_column_all>(), e.attribute );
+        bool ta = boost::apply_visitor( variant_type_check_visitor<ast::result_column_table>(), e.attribute );
+        bool ex = boost::apply_visitor( variant_type_check_visitor<ast::result_column_expr>(), e.attribute );
         CHECK( !al );
         CHECK( !ta );
         CHECK(  ex );
@@ -180,7 +180,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.size() == 1 );
+        CHECK( e.attribute.size() == 1 );
     }
 
     TEST_CASE( "Result column list: two columns and a binary operation", "[result_column]" ) {
@@ -189,7 +189,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.size() == 3 );
+        CHECK( e.attribute.size() == 3 );
     }
 
     TEST_CASE( "Result column list: four columns", "[result_column]" ) {
@@ -198,7 +198,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder == 0 );
-        CHECK( e.ast.size() == 4 );
+        CHECK( e.attribute.size() == 4 );
     }
 
 }}

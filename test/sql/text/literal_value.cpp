@@ -83,8 +83,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder  == 0 );
-        CHECK( e.ast.literal == "a" );
-        CHECK( e.ast.quotation  == quot::SINGLE );
+        CHECK( e.attribute.literal == "a" );
+        CHECK( e.attribute.quotation  == quot::SINGLE );
     }
 
     TEST_CASE( "Single digit string literal", "[literal_value]" ) {
@@ -93,8 +93,8 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder  == 0 );
-        CHECK( e.ast.literal    == "1" );
-        CHECK( e.ast.quotation  == quot::SINGLE );
+        CHECK( e.attribute.literal    == "1" );
+        CHECK( e.attribute.quotation  == quot::SINGLE );
     }
 
     TEST_CASE( "Single quoted comma string literal", "[literal_value]" ) {
@@ -145,7 +145,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder  == 0 );
-        bool v = boost::apply_visitor( variant_type_check_visitor<ast::numeric_literal>(), e.ast );
+        bool v = boost::apply_visitor( variant_type_check_visitor<ast::numeric_literal>(), e.attribute );
         CHECK( v );
     }
 
@@ -155,7 +155,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder  == 0 );
-        bool v = boost::apply_visitor( variant_type_check_visitor<ast::numeric_literal>(), e.ast );
+        bool v = boost::apply_visitor( variant_type_check_visitor<ast::numeric_literal>(), e.attribute );
         CHECK( v );
     }
 
@@ -165,7 +165,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder  == 0 );
-        bool v = boost::apply_visitor( variant_type_check_visitor<ast::string_literal>(), e.ast );
+        bool v = boost::apply_visitor( variant_type_check_visitor<ast::string_literal>(), e.attribute );
         CHECK( v );
     }
 
@@ -175,7 +175,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder  == 0 );
-        bool v = boost::apply_visitor( variant_type_check_visitor<ast::null_literal>(), e.ast );
+        bool v = boost::apply_visitor( variant_type_check_visitor<ast::null_literal>(), e.attribute );
         CHECK( v );
     }
 
@@ -185,7 +185,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder  == 0 );
-        bool v = boost::apply_visitor( variant_type_check_visitor<ast::function_literal>(), e.ast );
+        bool v = boost::apply_visitor( variant_type_check_visitor<ast::function_literal>(), e.attribute );
         CHECK( v );
     }
 
@@ -195,7 +195,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder  == 0 );
-        bool v = boost::apply_visitor( variant_type_check_visitor<ast::function_literal>(), e.ast );
+        bool v = boost::apply_visitor( variant_type_check_visitor<ast::function_literal>(), e.attribute );
         CHECK( v );
     }
 
@@ -205,7 +205,7 @@ namespace sql { namespace text {
         CHECK( e.success );
         CHECK( e.finished );
         CHECK( e.remainder  == 0 );
-        bool v = boost::apply_visitor( variant_type_check_visitor<ast::function_literal>(), e.ast );
+        bool v = boost::apply_visitor( variant_type_check_visitor<ast::function_literal>(), e.attribute );
         CHECK( v );
     }
 
