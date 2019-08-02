@@ -6,7 +6,7 @@
 
 namespace sql { namespace text {
 
-    auto const& parser = sql;
+    inline auto const& parser = sql;
 
 }}
 
