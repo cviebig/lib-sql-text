@@ -1,5 +1,5 @@
-#ifndef SQL_TEXT_PARSE_HPP
-#define SQL_TEXT_PARSE_HPP
+#ifndef SQL_TEXT_PARSER_PARSE_HPP
+#define SQL_TEXT_PARSER_PARSE_HPP
 
 #include "sql/text/parser/config.hpp"
 #include "sql/text/parser/parse_result.hpp"
@@ -20,4 +20,4 @@ namespace sql { namespace text {
 
 }}
 
-#endif //SQL_TEXT_PARSE_HPP
+#endif //SQL_TEXT_PARSER_PARSE_HPP
